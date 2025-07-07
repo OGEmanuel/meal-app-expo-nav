@@ -36,7 +36,10 @@ const MealsOverviewScreen = () => {
       <Stack.Screen
         options={{
           headerLeft: () => (
-            <TouchableOpacity onPress={() => router.replace("/")}>
+            <TouchableOpacity
+              onPress={() => router.replace("/")}
+              style={{ paddingHorizontal: 10 }}
+            >
               <Ionicons name="arrow-back" size={24} color="white" />
             </TouchableOpacity>
           ),
