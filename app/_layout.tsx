@@ -1,29 +1,57 @@
-import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
-import { useFonts } from 'expo-font';
-import { Stack } from 'expo-router';
-import { StatusBar } from 'expo-status-bar';
-import 'react-native-reanimated';
-
-import { useColorScheme } from '@/hooks/useColorScheme';
+import { Ionicons } from "@expo/vector-icons";
+import { Drawer } from "expo-router/drawer";
+import { StatusBar } from "expo-status-bar";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
 
 export default function RootLayout() {
-  const colorScheme = useColorScheme();
-  const [loaded] = useFonts({
-    SpaceMono: require('../assets/fonts/SpaceMono-Regular.ttf'),
-  });
-
-  if (!loaded) {
-    // Async font loading only occurs in development.
-    return null;
-  }
-
   return (
-    <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <Stack>
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen name="+not-found" />
-      </Stack>
-      <StatusBar style="auto" />
-    </ThemeProvider>
+    <>
+      <StatusBar style="light" />
+      <GestureHandlerRootView>
+        <Drawer
+          screenOptions={{
+            headerStyle: {
+              backgroundColor: "#351401",
+            },
+            headerTintColor: "white",
+            sceneStyle: {
+              backgroundColor: "#3f2f25",
+            },
+            drawerContentStyle: {
+              backgroundColor: "#351401",
+            },
+            drawerInactiveTintColor: "white",
+            drawerActiveTintColor: "#351401",
+            drawerActiveBackgroundColor: "#e4baa1",
+          }}
+        >
+          <Drawer.Screen
+            name="(categories)/index"
+            options={{
+              title: "All Categories",
+              drawerIcon: ({ color, size }) => (
+                <Ionicons name="list" color={color} size={size} />
+              ),
+            }}
+          />
+          <Drawer.Screen
+            name="favorites/index"
+            options={{
+              title: "Favorites",
+              drawerIcon: ({ color, size }) => (
+                <Ionicons name="star" color={color} size={size} />
+              ),
+            }}
+          />
+          <Drawer.Screen
+            name="(categories)/meals-overview"
+            options={{
+              headerShown: false,
+              drawerItemStyle: { display: "none" },
+            }}
+          />
+        </Drawer>
+      </GestureHandlerRootView>
+    </>
   );
 }
