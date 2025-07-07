@@ -7,7 +7,7 @@ import {
   Text,
   View,
 } from "react-native";
-import MealDetails from "./meal-details";
+import MealDetails from "../meal-details";
 
 const MealItem = (props: {
   title: string;

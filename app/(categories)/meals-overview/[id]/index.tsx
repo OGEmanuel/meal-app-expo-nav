@@ -1,9 +1,8 @@
-import MealItem from "@/components/meal-item";
+import MealsList from "@/components/meals-list/meals-list";
 import { CATEGORIES, MEALS } from "@/data/dummy-data";
-import Meal from "@/models/meal";
 import { Ionicons } from "@expo/vector-icons";
 import { Stack, useLocalSearchParams, useRouter } from "expo-router";
-import { FlatList, StyleSheet, TouchableOpacity, View } from "react-native";
+import { TouchableOpacity } from "react-native";
 
 const MealsOverviewScreen = () => {
   const params = useLocalSearchParams<{ id: string }>();
@@ -18,21 +17,8 @@ const MealsOverviewScreen = () => {
     (category) => category.id === catId
   )?.title;
 
-  const renderMealItem = (itemData: Meal) => {
-    return (
-      <MealItem
-        title={itemData.title}
-        imageUrl={itemData.imageUrl}
-        affordability={itemData.affordability}
-        complexity={itemData.complexity}
-        duration={itemData.duration}
-        id={itemData.id}
-      />
-    );
-  };
-
   return (
-    <View style={styles.container}>
+    <>
       <Stack.Screen
         options={{
           headerLeft: () => (
@@ -46,20 +32,9 @@ const MealsOverviewScreen = () => {
           title: categoryTitle,
         }}
       />
-      <FlatList
-        data={displayedMeals}
-        keyExtractor={(item) => item.id}
-        renderItem={(itemData) => renderMealItem(itemData.item)}
-      />
-    </View>
+      <MealsList displayedMeals={displayedMeals} />
+    </>
   );
 };
 
 export default MealsOverviewScreen;
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    padding: 16,
-  },
-});
