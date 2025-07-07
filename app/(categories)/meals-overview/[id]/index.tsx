@@ -38,7 +38,7 @@ const MealsOverviewScreen = () => {
           headerLeft: () => (
             <TouchableOpacity
               onPress={() => router.replace("/")}
-              style={{ paddingHorizontal: 10 }}
+              style={{ paddingRight: 33 }}
             >
               <Ionicons name="arrow-back" size={24} color="white" />
             </TouchableOpacity>
